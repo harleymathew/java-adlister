@@ -18,7 +18,7 @@ public class MySQLAdsDao implements Ads {
             DriverManager.registerDriver(new Driver());
             connection = DriverManager.getConnection(
                     config.getUrl(),
-                    config.getUser(),
+                    config.getUsername(),
                     config.getPassword()
             );
         } catch (SQLException e) {
@@ -68,5 +68,30 @@ public class MySQLAdsDao implements Ads {
         while (rs.next()) {
             ads.add(extractAd(rs));
         } return ads;
+    }
+
+    @Override
+    public Ad ViewAd(long id) {
+        return null;
+    }
+
+    @Override
+    public void editAd(Ad ad) {
+
+    }
+
+    @Override
+    public List<Ad> search(String searchAd) {
+        return null;
+    }
+
+    @Override
+    public List<Ad> showAds(long id) {
+        return null;
+    }
+
+    @Override
+    public List<Ad> findAdsByCategory(Long id) {
+        return null;
     }
 }

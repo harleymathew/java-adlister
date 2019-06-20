@@ -9,14 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MySQLUsersDao implements Users {
-    private Connection connection = null;
+    private Connection connection;
 
     public MySQLUsersDao(Config config) {
         try {
             DriverManager.registerDriver(new Driver());
             connection = DriverManager.getConnection(
                     config.getUrl(),
-                    config.getUser(),
+                    config.getUsername(),
                     config.getPassword()
             );
         } catch (SQLException e) {
@@ -28,12 +28,12 @@ public class MySQLUsersDao implements Users {
     public User findByUsername(String username) {
         String sql = "select * from users where username = ?";
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, username);
-            ResultSet rs = preparedStatement.executeQuery();
+            PreparedStatement Stmnt = connection.prepareStatement(sql);
+            Stmnt.setString(1, username);
+            ResultSet rs = Stmnt.executeQuery();
             if(rs.next()){
                 return extractUser(rs);
-            }
+            }//check this out
             return null;
         } catch (SQLException e) {
             e.printStackTrace();
