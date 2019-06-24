@@ -24,6 +24,7 @@ public class MySQLUsersDao implements Users {
         }
     }
 
+
     @Override
     public User findByUsername(String username) {
         String sql = "select * from users where username = ?";

@@ -27,19 +27,12 @@ public class LoginServlet extends HttpServlet {
 
         User dbUser = DaoFactory.getUsersDao().findByUsername(username);
 
-        if(dbUser == null){
+        if (dbUser == null) {
             response.sendRedirect("/login?error=username+doesn't+exist");
             return;
         }
 
         boolean validAttempt = dbUser.getPassword().equals(password);
-
-        if (validAttempt) {
-            request.getSession().setAttribute("user", dbUser);
-            response.sendRedirect("/profile");
-        } else {
-            response.sendRedirect("/login");
-        }
 
         if (validAttempt) {
             request.getSession().setAttribute("user", dbUser);
