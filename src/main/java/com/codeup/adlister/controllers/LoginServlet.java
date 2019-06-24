@@ -36,18 +36,18 @@ public class LoginServlet extends HttpServlet {
         boolean validAttempt = dbUser.getPassword().equals(password);
 
         if (validAttempt) {
-            request.getSession().setAttribute("user", dbUser);
+            request.getSession().setAttribute("user", username);
             response.sendRedirect("/profile");
         } else {
-            response.sendRedirect("/login");
+            response.sendRedirect("/messages");
 
         }
 
-        if (validAttempt) {
-            request.getSession().setAttribute("user", dbUser);
-            response.sendRedirect("/profile");
-        } else {
-            response.sendRedirect("/login");
-        }
+       // if (validAttempt) {
+         //   request.getSession().setAttribute("user", dbUser);
+           // response.sendRedirect("/profile");
+        //} else {
+         //   response.sendRedirect("/login");
+       // }
     }
 }

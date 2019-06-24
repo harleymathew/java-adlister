@@ -71,12 +71,12 @@ public class MySQLAdsDao implements Ads {
         return ads;
     }
 
-    @Override
+
     public Ad ViewAd(long id) {
         return null;
     }
 
-    @Override
+
     public void editAd(Ad ad) {
 
     }
@@ -96,20 +96,8 @@ public class MySQLAdsDao implements Ads {
         return null;
     }
 
-    public Ad findById(long id) {
-        String query = "SELECT * FROM ads WHERE id=?";
-        try {
-            PreparedStatement stmt = connection.prepareStatement(query);
-            stmt.setLong(1, id);
 
-            ResultSet rs = stmt.executeQuery();
-            rs.next();
 
-            return extractAd(rs);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);//new RuntimeException("error finding user by id");
-        }
-    }
 
      public void deleteAd(long id) {
         PreparedStatement delStmt = null;
@@ -139,6 +127,22 @@ public class MySQLAdsDao implements Ads {
             stmt.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException("Error creating a new ad.", e);
+        }
+    }
+
+    @Override
+    public Ad findById(Long id) {
+        String query = "SELECT * FROM ads WHERE id=?";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setLong(1, id);
+
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+
+            return extractAd(rs);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);//new RuntimeException("error finding user by id");
         }
     }
 
