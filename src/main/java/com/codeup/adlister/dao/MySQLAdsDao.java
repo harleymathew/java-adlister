@@ -41,7 +41,7 @@ public class MySQLAdsDao implements Ads {
     @Override
     public Long insert(Ad ad) {
         try {
-            PreparedStatement stmt = connection.prepareStatement("INSERT INTO ads(user_id, title, description) VALUES (?, ?, ?)", Statement.RETURN_GENERATED_KEYS );
+            PreparedStatement stmt = connection.prepareStatement("INSERT INTO ads(user_id, title, description) VALUES (?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
             stmt.setLong(1, ad.getUserId());
             stmt.setString(2, ad.getTitle());
             stmt.setString(3, ad.getDescription());
@@ -67,7 +67,8 @@ public class MySQLAdsDao implements Ads {
         List<Ad> ads = new ArrayList<>();
         while (rs.next()) {
             ads.add(extractAd(rs));
-        } return ads;
+        }
+        return ads;
     }
 
     @Override
@@ -94,4 +95,51 @@ public class MySQLAdsDao implements Ads {
     public List<Ad> findAdsByCategory(Long id) {
         return null;
     }
+
+    public Ad findById(long id) {
+        String query = "SELECT * FROM ads WHERE id=?";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setLong(1, id);
+
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+
+            return extractAd(rs);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);//new RuntimeException("error finding user by id");
+        }
+    }
+
+     public void deleteAd(long id) {
+        PreparedStatement delStmt = null;
+        try {
+            delStmt = connection.prepareStatement("DELETE FROM ads WHERE id=?");
+            delStmt.setLong(1, id);
+            delStmt.executeUpdate();
+
+            return;
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error deleting ads", e);
+        }
+
+
+    }
+
+    public void update(Ad ad) {
+        try {
+            String insertQuery = "UPDATE ads SET user_id = ?, title = ?, description = ? WHERE id=?";
+            PreparedStatement stmt = connection.prepareStatement(insertQuery);
+            stmt.setLong(1, ad.getUserId());
+            stmt.setString(2, ad.getTitle());
+            stmt.setString(3, ad.getDescription());
+            stmt.setLong(4,ad.getId());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error creating a new ad.", e);
+        }
+    }
+
 }

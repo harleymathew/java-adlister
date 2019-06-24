@@ -20,12 +20,6 @@ public class DaoFactory {
         return usersDao;
     }
 
-   // public static Categories getCategoriesDAO() {
-     //   if (categoriesDAO == null) {
-       //     categoriesDAO = new MySQLCategoriesDao(config);
-        //}
-        //return categoriesDAO;
-    //}
 
 
 }

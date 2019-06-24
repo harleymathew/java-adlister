@@ -29,5 +29,9 @@ public class RegisterServlet extends HttpServlet {
         request.getSession().setAttribute("user", userToBeSaved);
         response.sendRedirect("/profile");
 
+        if (password == null){
+
+        }
+
     }
 }

@@ -7,11 +7,24 @@
     </jsp:include>
 </head>
 <body>
-<jsp:include page="/WEB-INF/partials/navbar.jsp" />
+<jsp:include page="/WEB-INF/partials/navbar.jsp"/>
 
 <div class="container">
     <h1>Welcome to the Adlister!</h1>
-
 </div>
+<div>
+    <h2>Looking for something?</h2>
+</div>
+<br>
+
+
+
+<jsp:include page="/WEB-INF/partials/body.jsp"/>
+
+
+
+
+
+
 </body>
 </html>

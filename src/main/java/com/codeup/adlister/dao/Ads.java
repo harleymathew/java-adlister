@@ -10,14 +10,20 @@ public interface Ads {
     // insert a new ad and return the new ad's id
     Long insert(Ad ad);
     //  ---------View One Specific Ad---------
-    Ad ViewAd (long id);
+    //Ad ViewAd (long id);
 
     //  ---------Method to Update Ad---------
-    void editAd(Ad ad);
+    //void editAd(Ad ad);
     List<Ad> search(String searchAd);
+
+    void deleteAd(long id);
 
     List<Ad> showAds(long id);
 
     //    Object findAdsByCategory(Long categoryId);
     List<Ad> findAdsByCategory(Long id);
+
+    void update(Ad ad);
+
+    Ad findById(Long id);
 }
