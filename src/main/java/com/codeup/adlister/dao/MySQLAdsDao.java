@@ -18,7 +18,7 @@ public class MySQLAdsDao implements Ads {
             DriverManager.registerDriver(new Driver());
             connection = DriverManager.getConnection(
                     config.getUrl(),
-                    config.getUsername(),
+                    config.getUser(),
                     config.getPassword()
             );
         } catch (SQLException e) {
@@ -28,10 +28,10 @@ public class MySQLAdsDao implements Ads {
 
     @Override
     public List<Ad> all() {
-        Statement stmt = null;
+        PreparedStatement stmt = null;
         try {
-            stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM ads");
+            stmt = connection.prepareStatement("SELECT * FROM ads");
+            ResultSet rs = stmt.executeQuery();
             return createAdsFromResults(rs);
         } catch (SQLException e) {
             throw new RuntimeException("Error retrieving all ads.", e);
@@ -41,7 +41,8 @@ public class MySQLAdsDao implements Ads {
     @Override
     public Long insert(Ad ad) {
         try {
-            PreparedStatement stmt = connection.prepareStatement("INSERT INTO ads(user_id, title, description) VALUES (?, ?, ?)", Statement.RETURN_GENERATED_KEYS );
+            String insertQuery = "INSERT INTO ads(user_id, title, description) VALUES (?, ?, ?)";
+            PreparedStatement stmt = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
             stmt.setLong(1, ad.getUserId());
             stmt.setString(2, ad.getTitle());
             stmt.setString(3, ad.getDescription());
@@ -51,6 +52,32 @@ public class MySQLAdsDao implements Ads {
             return rs.getLong(1);
         } catch (SQLException e) {
             throw new RuntimeException("Error creating a new ad.", e);
+        }
+    }
+
+    @Override
+    public void update(Ad ad) {
+        try {
+            String updateQuery = "UPDATE ads SET title = ?, description = ? WHERE id = ?";
+            PreparedStatement stmt = connection.prepareStatement(updateQuery);
+            stmt.setString(1, ad.getTitle());
+            stmt.setString(2, ad.getDescription());
+            stmt.setLong(3, ad.getId());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error updating an ad.", e);
+        }
+    }
+
+    @Override
+    public void delete(long id) {
+        try {
+            String deleteQry = "DELETE FROM ads WHERE id = ?";
+            PreparedStatement stmt = connection.prepareStatement(deleteQry);
+            stmt.setLong(1, id);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error deleting a new ad.", e);
         }
     }
 
@@ -67,31 +94,11 @@ public class MySQLAdsDao implements Ads {
         List<Ad> ads = new ArrayList<>();
         while (rs.next()) {
             ads.add(extractAd(rs));
-        } return ads;
+        }
+        return ads;
     }
 
-    @Override
-    public Ad ViewAd(long id) {
-        return null;
-    }
-
-    @Override
-    public void editAd(Ad ad) {
-
-    }
-
-    @Override
-    public List<Ad> search(String searchAd) {
-        return null;
-    }
-
-    @Override
-    public List<Ad> showAds(long id) {
-        return null;
-    }
-
-    @Override
-    public List<Ad> findAdsByCategory(Long id) {
-        return null;
+    public static void main(String[] args) {
+//        MySQLAdsDao test = new MySQLAdsDao();
     }
 }
