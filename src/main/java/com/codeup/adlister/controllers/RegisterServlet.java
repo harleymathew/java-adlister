@@ -21,6 +21,7 @@ public class RegisterServlet extends HttpServlet {
         String username = request.getParameter("username");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
+        String passwordConfirmation = request.getParameter("confirm_password");
 
         User userToBeSaved = new User(username, email, password);
         long id = DaoFactory.getUsersDao().insert(userToBeSaved);
@@ -32,6 +33,20 @@ public class RegisterServlet extends HttpServlet {
         if (password == null){
 
         }
+        boolean inputHasErrors = username.isEmpty()
+                || email.isEmpty()
+                || password.isEmpty()
+                || (! password.equals(passwordConfirmation));
 
+        if (inputHasErrors) {
+            response.sendRedirect("/register");
+            return;
+        }
+
+        // create and save a new user
+        User user = new User(username, email, password);
+        DaoFactory.getUsersDao().insert(user);
+        response.sendRedirect("/login");
+    }
     }
 }
