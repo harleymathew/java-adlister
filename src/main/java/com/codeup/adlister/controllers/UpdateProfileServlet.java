@@ -28,7 +28,7 @@ public class UpdateProfileServlet extends HttpServlet {
             request.setAttribute("username", username);
             request.setAttribute("email", email);
             request.setAttribute("password", password);
-            request.setAttribute("profileConfigFailure", "Inputs are empty, FIX that LOSER!!!!!!");
+//            request.setAttribute("profileConfigFailure", "Inputs are empty");
             request.getRequestDispatcher("/WEB-INF/profile-config.jsp").forward(request, response);
             response.sendRedirect("/profile/configurations");
             return;
@@ -38,19 +38,15 @@ public class UpdateProfileServlet extends HttpServlet {
             request.setAttribute("username", username);
             request.setAttribute("email", email);
             request.setAttribute("password", password);
-            request.setAttribute("profileConfigFailure", "Inputs are empty, Please fix that");
+            request.setAttribute("profileConfigFailure", "Inputs are empty");
         }
 
 
 
-        //Need to get current user session username, email, password and replace.
-
-
-
+        //Get current user session username, email, password and replace.
         User user = new User(id, username, email, password);
         DaoFactory.getUsersDao().update(user);
         response.sendRedirect("/profile");
-
 
     }
 }

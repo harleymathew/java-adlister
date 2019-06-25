@@ -15,13 +15,11 @@ public class RegisterServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
     }
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String passwordConfirmation = request.getParameter("confirm_password");
-
         // validate input
         boolean inputHasErrors = username.isEmpty()
                 || email.isEmpty()
@@ -33,12 +31,11 @@ public class RegisterServlet extends HttpServlet {
             request.setAttribute("email", email);
             request.setAttribute("password", password);
             request.setAttribute("confirm_password", passwordConfirmation);
-            request.setAttribute("registrationFailure", "Inputs are empty, FIX that LOSER!!!!!!");
+//            request.setAttribute("registrationFailure", "Inputs are empty");
             request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
             response.sendRedirect("/register");
             return;
         }
-
         // validate whether username exists in database
         boolean usernameExists = false;
         if ((DaoFactory.getUsersDao().findByUsername(username)) != null) {
@@ -49,7 +46,7 @@ public class RegisterServlet extends HttpServlet {
             request.setAttribute("email", email);
             request.setAttribute("password", password);
             request.setAttribute("confirm_password", passwordConfirmation);
-            request.setAttribute("registrationFailure", "Account already exists, LOSER!");
+//            request.setAttribute("registrationFailure", "Account already exists");
             request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
             response.sendRedirect("/register");
             return;
@@ -60,16 +57,12 @@ public class RegisterServlet extends HttpServlet {
             request.setAttribute("email", email);
             request.setAttribute("password", password);
             request.setAttribute("confirm_password", passwordConfirmation);
-            request.setAttribute("registrationFailure", "Passwords do not match, try again LOSER!!!!!!");
+//            request.setAttribute("registrationFailure", "Passwords do not match");
             request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
             response.sendRedirect("/register");
             return;
         }
-
-
-
-        // create and save a new user
-
+        // create/save new user
         User user = new User(username, email, password);
         DaoFactory.getUsersDao().insert(user);
         response.sendRedirect("/login");

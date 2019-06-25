@@ -22,7 +22,7 @@
 
     <div class="row">
         <div class="col-md-6">
-            <h1>Here Are all your ads!</h1>
+            <h1>These are all your ads!</h1>
         </div>
         <div class="col-md-6">
             <form action="/profile/configurations">

@@ -29,7 +29,7 @@ public class UpdateAdServlet extends HttpServlet {
             request.setAttribute("title", title);
             request.setAttribute("description", description);
             request.setAttribute("adId",adId);
-            request.setAttribute("updateAdFailure", "Inputs are empty, FIX that LOSER!!!!!!");
+//            request.setAttribute("updateAdFailure", "Inputs are empty");
             request.getRequestDispatcher("/WEB-INF/ads/update.jsp").forward(request, response);
             response.sendRedirect("/ads/update");
             return;

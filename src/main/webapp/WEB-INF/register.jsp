@@ -9,16 +9,13 @@
     <style>
 
         #registerCon {
-            margin-top: 13rem;
+            margin-top: 12rem;
         }
 
     </style>
 
 </head>
 <body>
-
-<%@page import="com.codeup.adlister.dao.MySQLUsersDao"%>
-
 
 <!-- navbar -->
 <jsp:include page="partials/navbar.jsp" />
@@ -31,9 +28,6 @@
     String password = request.getParameter("password");
     String confirm_password = request.getParameter("confirm_password");
     String registrationFailure = request.getParameter("registrationFailure");
-
-
-
 %>
 
 <!-- container -->

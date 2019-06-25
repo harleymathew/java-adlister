@@ -26,8 +26,8 @@
 <div id="loginContainer" class="container">
     <div class="row">
         <div class="col-md-4 offset-sm-4 text-center">
-            <h1>Adlister!!!!!!</h1>
-            <h1>Log In right now!!!!</h1>
+            <h1>Adlister</h1>
+            <h1>Log In</h1>
             <h2 style="color: red;"><C:out value="${isNotLoggedIn}"></C:out></h2>
             <form action="/login" method="POST">
                 <div class="form-group">

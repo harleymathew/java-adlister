@@ -12,7 +12,6 @@
 
 
 <%
-
     String title = request.getParameter("title");
     String description = request.getParameter("description");
     String createAdFailure = request.getParameter("createAdFailure");

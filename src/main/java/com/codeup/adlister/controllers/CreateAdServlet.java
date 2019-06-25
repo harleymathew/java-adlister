@@ -32,7 +32,7 @@ public class CreateAdServlet extends HttpServlet {
         if(title.isEmpty() || description.isEmpty()){
             request.setAttribute("title", title);
             request.setAttribute("description", description);
-            request.setAttribute("createAdFailure", "Inputs are empty, FIX that LOSER!!!!!!");
+//            request.setAttribute("createAdFailure", "Inputs are empty");
             request.getRequestDispatcher("/WEB-INF/ads/create.jsp")
                     .forward(request, response);
 
