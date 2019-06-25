@@ -13,21 +13,61 @@ import java.io.IOException;
 @WebServlet(name = "controllers.RegisterServlet", urlPatterns = "/register")
 public class RegisterServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/users/register.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
     }
-
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
+        String passwordConfirmation = request.getParameter("confirm_password");
+        // validate input
+        boolean inputHasErrors = username.isEmpty()
+                || email.isEmpty()
+                || password.isEmpty()
+                || (! password.equals(passwordConfirmation));
 
-        User userToBeSaved = new User(username, email, password);
-        long id = DaoFactory.getUsersDao().insert(userToBeSaved);
-        userToBeSaved.setId(id);
+        if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
+            request.setAttribute("username", username);
+            request.setAttribute("email", email);
+            request.setAttribute("password", password);
+            request.setAttribute("confirm_password", passwordConfirmation);
+//            request.setAttribute("registrationFailure", "Inputs are empty");
+            request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
+            response.sendRedirect("/register");
+            return;
+        }
+        // validate whether username exists in database
+        boolean usernameExists = false;
+        if ((DaoFactory.getUsersDao().findByUsername(username)) != null) {
+            usernameExists = true;
+        }
+        if (usernameExists) {
+            request.setAttribute("username", username);
+            request.setAttribute("email", email);
+            request.setAttribute("password", password);
+            request.setAttribute("confirm_password", passwordConfirmation);
+//            request.setAttribute("registrationFailure", "Account already exists");
+            request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
+            response.sendRedirect("/register");
+            return;
+        }
 
-        request.getSession().setAttribute("user", userToBeSaved);
-        response.sendRedirect("/profile");
+        if(! password.equals(passwordConfirmation)){
+            request.setAttribute("username", username);
+            request.setAttribute("email", email);
+            request.setAttribute("password", password);
+            request.setAttribute("confirm_password", passwordConfirmation);
+//            request.setAttribute("registrationFailure", "Passwords do not match");
+            request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
+            response.sendRedirect("/register");
+            return;
+        }
+        // create/save new user
+        User user = new User(username, email, password);
+        DaoFactory.getUsersDao().insert(user);
+        response.sendRedirect("/login");
+
 
     }
+
 }

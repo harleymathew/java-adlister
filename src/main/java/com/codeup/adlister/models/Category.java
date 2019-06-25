@@ -2,16 +2,14 @@ package com.codeup.adlister.models;
 
 public class Category {
     private long id;
-    private String category;
+    private String name;
 
-    public Category() {}
-
-    public Category(long id, String category) {
+    public Category(long id, String name) {
         this.id = id;
-        this.category = category;
+        this.name = name;
     }
 
-    public long getId () {
+    public long getId() {
         return id;
     }
 
@@ -19,11 +17,11 @@ public class Category {
         this.id = id;
     }
 
-    public String getCategory() {
-        return category;
+    public String getName() {
+        return name;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setName(String name) {
+        this.name = name;
     }
 }
