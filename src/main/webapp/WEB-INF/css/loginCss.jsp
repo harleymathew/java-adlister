@@ -1,7 +1,5 @@
 <head>
-
     <style>
-
         #loginContainer {
             margin-top: 15rem;
         }
@@ -10,7 +8,5 @@
             width: 10rem;
             margin-left: 13rem;
         }
-
     </style>
-
 </head>

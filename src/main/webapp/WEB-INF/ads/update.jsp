@@ -9,17 +9,13 @@
 <body>
 <% request.setAttribute("adId", request.getParameter("adId"));%>
 <jsp:include page="/WEB-INF/partials/navbar.jsp"/>
-
-
 <%
-
     String title = request.getParameter("title");
     String description = request.getParameter("description");
     String updateAdFailure = request.getParameter("updateAdFailure");
     Long adId = Long.parseLong(request.getParameter("adId"));
 
 %>
-
 <div class="container">
     <h1>Update Your Ad, ${sessionScope.user.username}</h1>
 
@@ -48,7 +44,6 @@
             </form>
         </c:if>
     </c:forEach>
-
 </div>
 </body>
 </html>

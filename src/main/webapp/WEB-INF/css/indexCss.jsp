@@ -1,7 +1,5 @@
 <head>
-
     <style>
-
         .hidden {
             visibility: hidden;
         }
@@ -9,10 +7,6 @@
         .col-sm-6.links {
             margin-top: 2rem;
         }
-
-        /* container-1 */
-        
-
 
         #container1 .card {
             border: 1px black solid;
@@ -25,8 +19,6 @@
         #container1 h2 {
             margin-top: 5rem;
         }
-
-        /* container-2 */
         
         #container2 {
             margin-top: 7rem;
@@ -46,7 +38,5 @@
         #container2 p {
             font-size: 2.2em;
         }
-
     </style>
-
 </head>

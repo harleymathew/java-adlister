@@ -9,7 +9,6 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/partials/navbar.jsp"/>
-
 <%
 
     String username = request.getParameter("username");
@@ -20,7 +19,6 @@
 
 
 %>
-
 <div class="container">
     <h1>Profile Configurations</h1>
     <h3>Please update your profile as you see fit</h3>

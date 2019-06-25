@@ -10,7 +10,6 @@
 <% request.setAttribute("idAd", request.getParameter("idAd"));%>
 <jsp:include page="/WEB-INF/partials/navbar.jsp"/>
 <div class="container">
-
     <h1>${sessionScope.user.username}, are you sure you want to delete this ad?</h1>
     <c:forEach var="ad" items="${ads}">
         <c:if test="${ad.id == idAd}">
@@ -33,7 +32,6 @@
         </form>
         </c:if>
     </c:forEach>
-
 </div>
 </body>
 </html>

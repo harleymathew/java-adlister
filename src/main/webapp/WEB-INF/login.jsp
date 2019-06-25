@@ -13,7 +13,6 @@
 <jsp:include page="/WEB-INF/css/loginCss.jsp" />
 <!-- navbar -->
 <jsp:include page="/WEB-INF/partials/navbar.jsp" />
-
 <%
     request.setAttribute("url", request.getParameter("url"));
     String username2 = request.getParameter("username2");
@@ -21,7 +20,6 @@
     String isNotLoggedIn = request.getParameter("isNotLoggedIn");
 
 %>
-
 <!-- login form -->
 <div id="loginContainer" class="container">
     <div class="row">

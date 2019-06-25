@@ -19,8 +19,6 @@
 
 <!-- navbar -->
 <jsp:include page="partials/navbar.jsp" />
-
-
 <%
     request.setAttribute("url", request.getParameter("url"));
     String username = request.getParameter("username");
@@ -29,7 +27,6 @@
     String confirm_password = request.getParameter("confirm_password");
     String registrationFailure = request.getParameter("registrationFailure");
 %>
-
 <!-- container -->
 <div id="registerCon" class="container">
     <div class="row">
